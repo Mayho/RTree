@@ -139,7 +139,7 @@ var RTree = function(width){
 				for(var t = 0;t<ret_obj.nodes.length;t++)
 					_insert_subtree(ret_obj.nodes[t], tree);
 				ret_obj.nodes.length = 0;
-				if(hit_stack.length == 0 && tree.nodes.length <= 1) { // Underflow..on root!
+				if(hit_stack.length === 0 && tree.nodes.length <= 1) { // Underflow..on root!
 					ret_obj.nodes = _search_subtree(tree, true, ret_obj.nodes, tree);
 					tree.nodes.length = 0;
 					hit_stack.push(tree);
@@ -369,7 +369,7 @@ var RTree = function(width){
 		var bc; // Best Current node
 		// Initial insertion is special because we resize the Tree and we don't
 		// care about any overflow (seriously, how can the first object overflow?)
-		if(root.nodes.length == 0) {
+		if(root.nodes.length === 0) {
 			root.x = node.x; root.y = node.y;
 			root.w = node.w; root.h = node.h;
 			root.nodes.push(node);
@@ -385,11 +385,11 @@ var RTree = function(width){
 		// Walk back up the tree resizing and inserting as needed
 		do {
 			//handle the case of an empty node (from a split)
-			if(bc && "nodes" in bc && bc.nodes.length == 0) {
+			if(bc && "nodes" in bc && bc.nodes.length === 0) {
 				var pbc = bc; // Past bc
 				bc = tree_stack.pop();
 				for(var t=0;t<bc.nodes.length;t++)
-					if(bc.nodes[t] === pbc || bc.nodes[t].nodes.length == 0) {
+					if(bc.nodes[t] === pbc || bc.nodes[t].nodes.length === 0) {
 						bc.nodes.splice(t, 1);
 						break;
 				}
@@ -562,7 +562,7 @@ var RTree = function(width){
 
 		switch(arguments.length) {
 			case 1:
-				arguments[1] = false; // obj == false for conditionals
+				arguments[1] = false; // obj === false for conditionals
 			case 2:
 				arguments[2] = _T; // Add root node to end of argument list
 			default:
